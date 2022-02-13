@@ -1,17 +1,26 @@
-const sign_up_form = document.getElementById('sign-up-form');
-const inputs = Array.from(sign_up_form.querySelectorAll('input[type="text"]'));
+const triggers = Array.from(document.querySelectorAll('.trigger'));
 
-inputs.map((input) => {
-  if (input.id !== undefined) {
-    const corres_label = Array.from(
-      input.parentElement.querySelectorAll(`label[for="${input.id}"]`)
-    );
-    if (corres_label.length > 0) {
-      input.addEventListener('focus', () => {
-        corres_label.map((label) => {
-          label.classList.add(['-top-6']);
-        });
-      });
+triggers.map((trigger) => {
+  trigger.addEventListener("click", () => {
+    document.getElementById("the-modal").classList.remove('hidden')
+    if (trigger.dataset.target === 'presta-pay') {
+      document.getElementById("modal-title").innerText = "PRESTA PAY"
     }
-  }
-});
+
+    if (trigger.dataset.target === 'presta-lender') {
+      document.getElementById("modal-title").innerText = "PRESTA LENDER"
+    }
+
+    if (trigger.dataset.target === 'easy-ussd') {
+      document.getElementById("modal-title").innerText = "EASY USSD APP"
+    }
+
+    if (trigger.dataset.target === 'e-guarantorship') {
+      document.getElementById("modal-title").innerText = "E-GUARANTORSHIP"
+    }    
+  })
+})
+
+document.getElementById("modal-toggle").addEventListener("click", () => {
+  document.getElementById("the-modal").classList.add("hidden")
+})
